@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   constructor(private homeService: HomeService, public dialog: MatDialog) {
     this.baths$ = this.homeService.list().pipe(
       catchError((error) => {
-        this.onError('Erro ao carregar dados.')
+        this.onError('Falha ao carregar dados.')
         return of([]);
       })
     );
