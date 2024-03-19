@@ -2,7 +2,10 @@
   {"_id": "1", "date": "26/03/2024", "name": "Lola", "category": "Cachorro", "time": "09:30"},
   {"_id": "1", "date": "26/03/2024", "name": "Romeu", "category": "Cachorro", "time": "10:00"},
   {"_id": "1", "date": "26/03/2024", "name": "Cristal", "category": "Cachorro", "time": "10:30"},
+  {"_id": "1", "date": "26/03/2024", "name": "Rose", "category": "Gato", "time": "11:30"},
   {"_id": "1", "date": "26/03/2024", "name": "Bela", "category": "Cachorro", "time": "11:00"},
   {"_id": "1", "date": "26/03/2024", "name": "Cacau", "category": "Cachorro", "time": "11:30"},
-  {"_id": "1", "date": "26/03/2024", "name": "Like", "category": "Cachorro", "time": "12:00"}
+  {"_id": "1", "date": "26/03/2024", "name": "Lana", "category": "Gato", "time": "12:00"},
+  {"_id": "1", "date": "26/03/2024", "name": "Like", "category": "Cachorro", "time": "12:00"},
+  {"_id": "1", "date": "26/03/2024", "name": "Kitty", "category": "Gato", "time": "12:00"}
 ]

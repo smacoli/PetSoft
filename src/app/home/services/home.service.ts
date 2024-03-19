@@ -16,7 +16,6 @@ export class HomeService {
     return this.httpClient.get<Bath[]>(this.API)
     .pipe(
       first(),
-      delay(2000),
       tap(banhos => console.log(banhos))
     );
   }
