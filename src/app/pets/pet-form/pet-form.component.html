@@ -4,8 +4,8 @@
   #stepper
   [animationDuration]="animationDuration"
 >
-  <mat-step [stepControl]="form1">
-    <form [formGroup]="form1">
+  <mat-step [stepControl]="form">
+    <form [formGroup]="form">
       <ng-template matStepLabel>Informações do pet</ng-template>
 
       <mat-form-field class="full-width">
@@ -27,22 +27,26 @@
       </mat-form-field>
 
       <div>
+        <button mat-button mat-button color="warn" (click)="stepper.reset()">
+          Limpar
+        </button>
         <button mat-button matStepperNext>Próximo</button>
       </div>
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="form2">
-    <form [formGroup]="form2">
+  <mat-step [stepControl]="form">
+    <form [formGroup]="form">
       <ng-template matStepLabel>Raça e espécie</ng-template>
 
       <mat-form-field class="full-width">
-        <input
-          matInput
-          placeholder="Espécie"
-          formControlName="species"
-          required
-        />
+        <mat-label>Espécie</mat-label>
+        <mat-select formControlName="species">
+          <mat-option value="Cao">Cão</mat-option>
+          <mat-option value="Gato">Gato</mat-option>
+          <mat-option value="Ave">Ave</mat-option>
+          <mat-option value="Roedor">Roedor</mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field class="full-width">
@@ -50,15 +54,20 @@
       </mat-form-field>
 
       <div>
+        <button mat-button mat-button color="warn" (click)="stepper.reset()">
+          Limpar
+        </button>
         <button mat-button matStepperPrevious>Voltar</button>
         <button mat-button matStepperNext>Próximo</button>
       </div>
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="form3">
-    <form [formGroup]="form3">
-      <ng-template matStepLabel>Observações e informações do humano responsável</ng-template>
+  <mat-step [stepControl]="form">
+    <form [formGroup]="form">
+      <ng-template matStepLabel
+        >Observações e informações do humano responsável</ng-template
+      >
 
       <mat-form-field class="full-width">
         <input
@@ -79,6 +88,9 @@
       </mat-form-field>
 
       <div>
+        <button mat-button mat-button color="warn" (click)="stepper.reset()">
+          Limpar
+        </button>
         <button mat-button matStepperPrevious>Voltar</button>
         <button mat-button matStepperNext>Próximo</button>
       </div>
@@ -86,11 +98,10 @@
   </mat-step>
 
   <mat-step>
-    <ng-template matStepLabel>Pronto</ng-template>
-    Finalizado.
+    <ng-template matStepLabel>Finalizar</ng-template>
     <div>
-      <button mat-button matStepperPrevious>Voltar</button>
-      <button mat-button (click)="stepper.reset()">Limpar</button>
+      <button mat-button (click)="onCancel()"  color="warn">Cancelar</button>
+      <button mat-raised-button (click)="onSubmit()" color="primary" >Salvar</button>
     </div>
   </mat-step>
 </mat-vertical-stepper>

@@ -1,5 +1,7 @@
+import { PetService } from './../services/pet.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-pet-form',
@@ -7,26 +9,38 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrl: './pet-form.component.scss',
 })
 export class PetFormComponent {
-
   animationDuration: string = '1500';
 
-  form1: FormGroup; // Linkar esta variavel com o formulario html
-  form2: FormGroup;
-  form3: FormGroup;
+  form: FormGroup; // Linkar esta variavel com o formulario html
 
-  constructor(public formBuilder: FormBuilder){ // Constroi o formulario
-    this.form1 = this.formBuilder.group({
+  constructor(
+    public formBuilder: FormBuilder,
+    public service: PetService,
+    private _snackBar: MatSnackBar
+  ) {
+    // Constroi o formulario
+    this.form = this.formBuilder.group({
       name: [null],
-      age: [null]
-    }),
-    this.form2 = this.formBuilder.group({
+      age: [null],
       species: [null],
-      race: [null]
-    }),
-    this.form3 = this.formBuilder.group({
+      race: [null],
       observation: [null],
-      owner: [null]
+      owner: [null],
     });
   }
 
+  onSubmit() {
+    this.service.save(this.form.value).subscribe({
+      next: (result) => console.log(result),
+      error: (error) => this.onError(),
+    });
+  }
+
+  onCancel() {
+
+  }
+
+  private onError(){
+    this._snackBar.open('Erro ao salvar pet', '', { duration: 3000 }); // Snackbar de erro
+  }
 }
