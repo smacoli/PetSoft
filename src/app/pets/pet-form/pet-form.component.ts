@@ -1,5 +1,6 @@
 import { PetService } from './../services/pet.service';
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -15,8 +16,9 @@ export class PetFormComponent {
 
   constructor(
     public formBuilder: FormBuilder,
-    public service: PetService,
-    private _snackBar: MatSnackBar
+    private service: PetService,
+    private _snackBar: MatSnackBar,
+    private location: Location
   ) {
     // Constroi o formulario
     this.form = this.formBuilder.group({
@@ -31,13 +33,18 @@ export class PetFormComponent {
 
   onSubmit() {
     this.service.save(this.form.value).subscribe({
-      next: (result) => console.log(result),
+      next: (result) => this.onSuccess(),
       error: (error) => this.onError(),
     });
   }
 
   onCancel() {
+    this.location.back(); //Volta para listagem de pets
+  }
 
+  private onSuccess(){
+    this._snackBar.open('Pet salvo com sucesso!', '', { duration: 3000 });
+    this.onCancel();
   }
 
   private onError(){
