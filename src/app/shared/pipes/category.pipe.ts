@@ -9,7 +9,7 @@ export class CategoryPipe implements PipeTransform {
   // string: categoria do pet, gato ou cachorro
   transform(value: string): string {
     switch(value){
-      case 'cachorro': return 'pets';
+      case 'Cao': return 'Cao';
       case 'gato' : return 'android';
     }
     return 'pets';
