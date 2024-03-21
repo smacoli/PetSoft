@@ -5,11 +5,13 @@ import { PetsRoutingModule } from './pets-routing.module';
 import { PetsComponent } from './pets/pets.component';
 import { SharedModule } from '../shared/shared.module';
 import { AppMaterialModule } from '../shared/app-material/app-material.module';
+import { PetFormComponent } from './pet-form/pet-form.component';
 
 
 @NgModule({
   declarations: [
-    PetsComponent
+    PetsComponent,
+    PetFormComponent
   ],
   imports: [
     CommonModule,
