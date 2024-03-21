@@ -1,78 +1,18 @@
-<mat-card>
-  <mat-toolbar>
+<mat-card class="main-card">
+  <mat-toolbar color="primary">
     <span>Pets cadastrados</span>
   </mat-toolbar>
 
-  <div *ngIf="pets$ | async as petsDataSource; else loading">
-    <table mat-table [dataSource]="petsDataSource" class="mat-elevation-z8">
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Nome</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-      </ng-container>
+  <div class="mat-elevation-z8">
+    <app-pets-list
+      *ngIf="pets$ | async as pets; else loading"
+      [pets]="pets"
+    ></app-pets-list>
 
-      <!-- Age Column -->
-      <ng-container matColumnDef="age">
-        <th mat-header-cell *matHeaderCellDef>Idade</th>
-        <td mat-cell *matCellDef="let element">{{ element.age }}</td>
-      </ng-container>
-
-      <!-- Species Column -->
-      <ng-container matColumnDef="species">
-        <th mat-header-cell *matHeaderCellDef>Espécie</th>
-        <td mat-cell *matCellDef="let element">{{ element.species }}
-
-          <mat-icon> {{ element.category | category }} </mat-icon>
-
-        </td>
-      </ng-container>
-
-      <!-- Race Column -->
-      <ng-container matColumnDef="race">
-        <th mat-header-cell *matHeaderCellDef>Raça</th>
-        <td mat-cell *matCellDef="let element">{{ element.race }}</td>
-      </ng-container>
-
-      <!-- Observation Column -->
-      <ng-container matColumnDef="observation">
-        <th mat-header-cell *matHeaderCellDef>Observação</th>
-        <td mat-cell *matCellDef="let element">{{ element.observation }}</td>
-      </ng-container>
-
-      <!-- Owner Column -->
-      <ng-container matColumnDef="owner">
-        <th mat-header-cell *matHeaderCellDef>Tutor</th>
-        <td mat-cell *matCellDef="let element">{{ element.owner }}</td>
-      </ng-container>
-
-      <!-- Actions Column -->
-      <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef>
-          <button  (click)="onAdd()" mat-mini-fab color="accent" aria-label="Adicionar pet">
-            <mat-icon>add</mat-icon>
-          </button>
-        </mat-header-cell>
-
-        <mat-cell *matCellDef="let pet">
-          <button mat-icon-button aria-label="Editar pet">
-            <mat-icon>edit</mat-icon>
-          </button>
-
-          <button mat-icon-button color="warn" aria-label="Remover pet">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </mat-cell>
-
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
+    <ng-template #loading>
+      <div class="loading-spinner">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
   </div>
-
-  <ng-template #loading>
-    <div class="loading-spinner">
-      <mat-spinner></mat-spinner>
-    </div>
-  </ng-template>
 </mat-card>

@@ -7,12 +7,14 @@ import { SharedModule } from '../shared/shared.module';
 import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { PetFormComponent } from './pet-form/pet-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PetsListComponent } from './pets-list/pets-list.component';
 
 
 @NgModule({
   declarations: [
     PetsComponent,
-    PetFormComponent
+    PetFormComponent,
+    PetsListComponent
   ],
   imports: [
     CommonModule,

@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './pet-form.component.scss',
 })
 export class PetFormComponent {
-  animationDuration: string = '1500';
+  animationDuration: string = '1000';
 
   form: FormGroup; // Linkar esta variavel com o formulario html
 

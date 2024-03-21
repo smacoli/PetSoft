@@ -19,7 +19,7 @@ export class PetService {
     );
   }
 
-  save(record: Pet){ // Salva o pet no backend, esta sendo chamado no construtor do pet-form.js, no metodo click do botao salvar
+  save(record: Partial<Pet>){ // Salva o pet no backend, esta sendo chamado no construtor do pet-form.js, no metodo click do botao salvar
     return this.httpClient.post<Pet>(this.API, record).pipe(first());
   }
 }

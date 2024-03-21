@@ -1,107 +1,111 @@
-<mat-vertical-stepper
-  color="primary"
-  [linear]="false"
-  #stepper
-  [animationDuration]="animationDuration"
->
-  <mat-step [stepControl]="form">
-    <form [formGroup]="form">
-      <ng-template matStepLabel>Informações do pet</ng-template>
+<mat-card class="main-card">
+  <mat-vertical-stepper
+    color="primary"
+    [linear]="false"
+    #stepper
+    [animationDuration]="animationDuration"
+  >
+    <mat-step [stepControl]="form">
+      <form [formGroup]="form">
+        <ng-template matStepLabel>Informações do pet</ng-template>
 
-      <mat-form-field class="full-width">
-        <input
-          matInput
-          placeholder="Nome do pet"
-          formControlName="name"
-          required
-        />
-      </mat-form-field>
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            placeholder="Nome do pet"
+            formControlName="name"
+            required
+          />
+        </mat-form-field>
 
-      <mat-form-field class="full-width">
-        <input
-          matInput
-          placeholder="Idade do pet"
-          formControlName="age"
-          required
-        />
-      </mat-form-field>
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            placeholder="Idade do pet"
+            formControlName="age"
+            required
+          />
+        </mat-form-field>
 
+        <div>
+          <button mat-button mat-button color="warn" (click)="stepper.reset()">
+            Limpar
+          </button>
+          <button mat-button matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="form">
+      <form [formGroup]="form">
+        <ng-template matStepLabel>Raça e espécie</ng-template>
+
+        <mat-form-field class="full-width">
+          <mat-label>Espécie</mat-label>
+          <mat-select formControlName="species">
+            <mat-option value="Cao">Cão</mat-option>
+            <mat-option value="Gato">Gato</mat-option>
+            <mat-option value="Ave">Ave</mat-option>
+            <mat-option value="Roedor">Roedor</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Raça" formControlName="race" required />
+        </mat-form-field>
+
+        <div>
+          <button mat-button mat-button color="warn" (click)="stepper.reset()">
+            Limpar
+          </button>
+          <button mat-button matStepperPrevious>Voltar</button>
+          <button mat-button matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="form">
+      <form [formGroup]="form">
+        <ng-template matStepLabel
+          >Observações e informações do humano responsável</ng-template
+        >
+
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            placeholder="Observações"
+            formControlName="observation"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            placeholder="Nome do tutor"
+            formControlName="owner"
+            required
+          />
+        </mat-form-field>
+
+        <div>
+          <button mat-button mat-button color="warn" (click)="stepper.reset()">
+            Limpar
+          </button>
+          <button mat-button matStepperPrevious>Voltar</button>
+          <button mat-button matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Finalizar</ng-template>
       <div>
-        <button mat-button mat-button color="warn" (click)="stepper.reset()">
-          Limpar
+        <button mat-button (click)="onCancel()" color="warn">Cancelar</button>
+        <button mat-raised-button (click)="onSubmit()" color="primary">
+          Salvar
         </button>
-        <button mat-button matStepperNext>Próximo</button>
       </div>
-    </form>
-  </mat-step>
-
-  <mat-step [stepControl]="form">
-    <form [formGroup]="form">
-      <ng-template matStepLabel>Raça e espécie</ng-template>
-
-      <mat-form-field class="full-width">
-        <mat-label>Espécie</mat-label>
-        <mat-select formControlName="species">
-          <mat-option value="Cao">Cão</mat-option>
-          <mat-option value="Gato">Gato</mat-option>
-          <mat-option value="Ave">Ave</mat-option>
-          <mat-option value="Roedor">Roedor</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Raça" formControlName="race" required />
-      </mat-form-field>
-
-      <div>
-        <button mat-button mat-button color="warn" (click)="stepper.reset()">
-          Limpar
-        </button>
-        <button mat-button matStepperPrevious>Voltar</button>
-        <button mat-button matStepperNext>Próximo</button>
-      </div>
-    </form>
-  </mat-step>
-
-  <mat-step [stepControl]="form">
-    <form [formGroup]="form">
-      <ng-template matStepLabel
-        >Observações e informações do humano responsável</ng-template
-      >
-
-      <mat-form-field class="full-width">
-        <input
-          matInput
-          placeholder="Observações"
-          formControlName="observation"
-          required
-        />
-      </mat-form-field>
-
-      <mat-form-field class="full-width">
-        <input
-          matInput
-          placeholder="Nome do tutor"
-          formControlName="owner"
-          required
-        />
-      </mat-form-field>
-
-      <div>
-        <button mat-button mat-button color="warn" (click)="stepper.reset()">
-          Limpar
-        </button>
-        <button mat-button matStepperPrevious>Voltar</button>
-        <button mat-button matStepperNext>Próximo</button>
-      </div>
-    </form>
-  </mat-step>
-
-  <mat-step>
-    <ng-template matStepLabel>Finalizar</ng-template>
-    <div>
-      <button mat-button (click)="onCancel()"  color="warn">Cancelar</button>
-      <button mat-raised-button (click)="onSubmit()" color="primary" >Salvar</button>
-    </div>
-  </mat-step>
-</mat-vertical-stepper>
+    </mat-step>
+  </mat-vertical-stepper>
+</mat-card>
