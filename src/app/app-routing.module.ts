@@ -5,7 +5,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'pets' },
   {
     path: 'pets',
-    loadChildren: () => import('./pets/pets.module').then(m => m.HomeModule)
+    loadChildren: () => import('./pets/pets.module').then(m => m.PetsModule)
   }
 ];
 

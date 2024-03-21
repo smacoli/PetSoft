@@ -14,7 +14,7 @@ import { ErrorDialogComponent } from '../../shared/components/error-dialog/error
 })
 export class PetsComponent implements OnInit{
   pets$: Observable<Pet[]>;
-  displayedColumns = ['name', 'age', 'species', 'race', 'observation', 'owner'];
+  displayedColumns = ['name', 'age', 'species', 'race', 'observation', 'owner', 'actions'];
   petsDataSource: MatTableDataSource<Pet> = new MatTableDataSource<Pet>();
 
   constructor(private petService: PetService, public dialog: MatDialog) {

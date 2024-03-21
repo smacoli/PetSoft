@@ -15,8 +15,7 @@ export class PetService {
   list(){
     return this.httpClient.get<Pet[]>(this.API)
     .pipe(
-      first(),
-      tap(banhos => console.log(banhos))
+      tap(pets => console.log(pets))
     );
   }
 }
