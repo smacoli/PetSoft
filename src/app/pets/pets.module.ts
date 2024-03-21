@@ -6,6 +6,7 @@ import { PetsComponent } from './pets/pets.component';
 import { SharedModule } from '../shared/shared.module';
 import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { PetFormComponent } from './pet-form/pet-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { PetFormComponent } from './pet-form/pet-form.component';
     CommonModule,
     PetsRoutingModule,
     SharedModule,
-    AppMaterialModule
+    AppMaterialModule,
+    ReactiveFormsModule // Fornece form builder e form group para formularios
   ]
 })
 export class PetsModule { }

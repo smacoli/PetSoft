@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { ErrorDialogComponent } from '../../shared/components/error-dialog/error-dialog.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-pets',
@@ -18,7 +18,7 @@ export class PetsComponent implements OnInit{
   displayedColumns = ['name', 'age', 'species', 'race', 'observation', 'owner', 'actions'];
   petsDataSource: MatTableDataSource<Pet> = new MatTableDataSource<Pet>();
 
-  constructor(private petService: PetService, public dialog: MatDialog, public router: Router) {
+  constructor(private petService: PetService, public dialog: MatDialog, public router: Router, public route: ActivatedRoute) {
     this.pets$ = this.petService.list().pipe(
       catchError((error) => {
         this.onError('Falha ao carregar dados.')
@@ -40,6 +40,7 @@ export class PetsComponent implements OnInit{
   }
 
   onAdd(){
-    this.router.navigate(['pets/new']); // Acao do botao adicionar pet, leva para pagina do form-pet
+    // Acao do botao adicionar pet, leva para pagina do form-pet
+    this.router.navigate(['new'], {relativeTo: this.route}); // Relative to: pega a rota atual e agrega /new. Por exemplo, pets/new.
   }
 }

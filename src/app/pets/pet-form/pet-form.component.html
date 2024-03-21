@@ -1,1 +1,96 @@
-<p>pet-form works!</p>
+<mat-vertical-stepper
+  color="primary"
+  [linear]="false"
+  #stepper
+  [animationDuration]="animationDuration"
+>
+  <mat-step [stepControl]="form1">
+    <form [formGroup]="form1">
+      <ng-template matStepLabel>Informações do pet</ng-template>
+
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Nome do pet"
+          formControlName="name"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Idade do pet"
+          formControlName="age"
+          required
+        />
+      </mat-form-field>
+
+      <div>
+        <button mat-button matStepperNext>Próximo</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="form2">
+    <form [formGroup]="form2">
+      <ng-template matStepLabel>Raça e espécie</ng-template>
+
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Espécie"
+          formControlName="species"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Raça" formControlName="race" required />
+      </mat-form-field>
+
+      <div>
+        <button mat-button matStepperPrevious>Voltar</button>
+        <button mat-button matStepperNext>Próximo</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="form3">
+    <form [formGroup]="form3">
+      <ng-template matStepLabel>Observações e informações do humano responsável</ng-template>
+
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Observações"
+          formControlName="observation"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Nome do tutor"
+          formControlName="owner"
+          required
+        />
+      </mat-form-field>
+
+      <div>
+        <button mat-button matStepperPrevious>Voltar</button>
+        <button mat-button matStepperNext>Próximo</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Pronto</ng-template>
+    Finalizado.
+    <div>
+      <button mat-button matStepperPrevious>Voltar</button>
+      <button mat-button (click)="stepper.reset()">Limpar</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
