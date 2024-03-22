@@ -41,7 +41,7 @@
 
   <!-- Actions Column -->
   <ng-container matColumnDef="actions">
-    <mat-header-cell *matHeaderCellDef>
+    <mat-header-cell *matHeaderCellDef class="action-column-header">
       <button
         (click)="onAdd()"
         mat-mini-fab
@@ -52,7 +52,7 @@
       </button>
     </mat-header-cell>
 
-    <mat-cell *matCellDef="let pet">
+    <mat-cell *matCellDef="let pet" class="action-column">
       <button mat-icon-button aria-label="Editar pet">
         <mat-icon>edit</mat-icon>
       </button>
