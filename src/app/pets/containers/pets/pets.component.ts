@@ -1,27 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { PetService } from '../services/pet.service';
-import { Pet } from '../model/Pet';
+import { PetService } from '../../services/pet.service';
+import { Pet } from '../../model/Pet';
 import { Observable, catchError } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
-import { ErrorDialogComponent } from '../../shared/components/error-dialog/error-dialog.component';
+import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-pets',
   templateUrl: './pets.component.html',
-  styleUrl: './pets.component.scss'
+  styleUrl: './pets.component.scss',
 })
-export class PetsComponent implements OnInit{
+export class PetsComponent implements OnInit {
   pets$: Observable<Pet[]>;
-  displayedColumns = ['name', 'age', 'species', 'race', 'observation', 'owner', 'actions'];
+  displayedColumns = [
+    'name',
+    'age',
+    'species',
+    'race',
+    'observation',
+    'owner',
+    'actions',
+  ];
   petsDataSource: MatTableDataSource<Pet> = new MatTableDataSource<Pet>();
 
-  constructor(private petService: PetService, public dialog: MatDialog, public router: Router, public route: ActivatedRoute) {
+  constructor(
+    private petService: PetService,
+    public dialog: MatDialog,
+    public router: Router,
+    public route: ActivatedRoute
+  ) {
     this.pets$ = this.petService.list().pipe(
       catchError((error) => {
-        this.onError('Falha ao carregar dados.')
+        this.onError('Falha ao carregar dados.');
         return of([]);
       })
     );
@@ -29,7 +42,7 @@ export class PetsComponent implements OnInit{
 
   onError(errorMsg: string) {
     this.dialog.open(ErrorDialogComponent, {
-      data: errorMsg
+      data: errorMsg,
     });
   }
 
@@ -39,8 +52,8 @@ export class PetsComponent implements OnInit{
     });
   }
 
-  onAdd(){
+  onAdd() {
     // Acao do botao adicionar pet, leva para pagina do form-pet
-    this.router.navigate(['new'], {relativeTo: this.route}); // Relative to: pega a rota atual e agrega /new. Por exemplo, pets/new.
+    this.router.navigate(['new'], { relativeTo: this.route }); // Relative to: pega a rota atual e agrega /new. Por exemplo, pets/new.
   }
 }

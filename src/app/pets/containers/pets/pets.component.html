@@ -7,6 +7,7 @@
     <app-pets-list
       *ngIf="pets$ | async as pets; else loading"
       [pets]="pets"
+      (add)="onAdd()"
     ></app-pets-list>
 
     <ng-template #loading>

@@ -1,4 +1,4 @@
-import { PetService } from './../services/pet.service';
+import { PetService } from '../../../services/pet.service';
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -42,12 +42,12 @@ export class PetFormComponent {
     this.location.back(); //Volta para listagem de pets
   }
 
-  private onSuccess(){
+  private onSuccess() {
     this._snackBar.open('Pet salvo com sucesso!', '', { duration: 3000 });
     this.onCancel();
   }
 
-  private onError(){
+  private onError() {
     this._snackBar.open('Erro ao salvar pet', '', { duration: 3000 }); // Snackbar de erro
   }
 }
