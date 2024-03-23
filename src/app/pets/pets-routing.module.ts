@@ -5,7 +5,8 @@ import { PetFormComponent } from './containers/pets/pet-form/pet-form.component'
 
 const routes: Routes = [
   { path: '', component: PetsComponent },
-  { path: 'new', component: PetFormComponent } // Leva a pag de cadastro de pets (pets/new)
+  { path: 'new', component: PetFormComponent }, // Leva a pag de cadastro de pets (pets/new)
+  { path: 'edit/:id', component: PetFormComponent }
 ];
 
 @NgModule({

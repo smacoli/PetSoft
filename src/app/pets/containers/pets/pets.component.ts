@@ -14,7 +14,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './pets.component.scss',
 })
 export class PetsComponent implements OnInit {
+
   pets$: Observable<Pet[]>;
+
   displayedColumns = [
     'name',
     'age',
@@ -55,5 +57,9 @@ export class PetsComponent implements OnInit {
   onAdd() {
     // Acao do botao adicionar pet, leva para pagina do form-pet
     this.router.navigate(['new'], { relativeTo: this.route }); // Relative to: pega a rota atual e agrega /new. Por exemplo, pets/new.
+  }
+
+  onEdit(pet: Pet){
+    this.router.navigate(['edit', pet._id], { relativeTo: this.route });
   }
 }

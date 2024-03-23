@@ -8,6 +8,7 @@
       *ngIf="pets$ | async as pets; else loading"
       [pets]="pets"
       (add)="onAdd()"
+      (edit)="onEdit($event)"
     ></app-pets-list>
 
     <ng-template #loading>

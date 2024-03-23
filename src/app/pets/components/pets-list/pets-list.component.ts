@@ -8,8 +8,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './pets-list.component.scss',
 })
 export class PetsListComponent {
+
   @Input() pets: Pet[] = [];
   @Output() add = new EventEmitter(false);
+  @Output() edit = new EventEmitter(false);
 
   readonly displayedColumns = [
     'name',
@@ -25,5 +27,9 @@ export class PetsListComponent {
 
   onAdd() {
     this.router.navigate(['new'], { relativeTo: this.route });
+  }
+
+  onEdit(pet: Pet){
+    this.edit.emit(pet);
   }
 }

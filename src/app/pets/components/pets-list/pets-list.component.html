@@ -53,7 +53,7 @@
     </mat-header-cell>
 
     <mat-cell *matCellDef="let pet" class="action-column">
-      <button mat-icon-button aria-label="Editar pet">
+      <button (click)="onEdit(pet)" mat-icon-button aria-label="Editar pet">
         <mat-icon>edit</mat-icon>
       </button>
 
