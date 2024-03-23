@@ -19,6 +19,10 @@ export class PetService {
     );
   }
 
+  loadById(id: string){
+    return this.httpClient.get<Pet>(`${this.API}/${id}`);
+  }
+
   save(record: Partial<Pet>){ // Salva o pet no backend, esta sendo chamado no construtor do pet-form.js, no metodo click do botao salvar
     return this.httpClient.post<Pet>(this.API, record).pipe(first());
   }
