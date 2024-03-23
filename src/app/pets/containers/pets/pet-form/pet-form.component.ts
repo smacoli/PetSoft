@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
+import { Pet } from '../../../model/Pet';
 
 @Component({
   selector: 'app-pet-form',
@@ -18,10 +20,12 @@ export class PetFormComponent {
     public formBuilder: FormBuilder,
     private service: PetService,
     private _snackBar: MatSnackBar,
-    private location: Location
+    private location: Location,
+    private route: ActivatedRoute
   ) {
     // Constroi o formulario
     this.form = this.formBuilder.group({
+      _id: [null], //Campo escondido no form, apenas o componente tem acesso
       name: [null],
       age: [null],
       species: [null],
@@ -29,6 +33,20 @@ export class PetFormComponent {
       observation: [null],
       owner: [null],
     });
+
+    const pet: Pet = this.route.snapshot.data['pet'];
+
+    //Pega as infos do pet e preenche o formulario de edicao com elas
+    this.form.patchValue({
+      _id: pet._id,
+      name: pet.name,
+      age: pet.age,
+      species: pet.species,
+      race: pet.race,
+      observation: pet.observation,
+      owner: pet.owner
+    })
+
   }
 
   onSubmit() {
