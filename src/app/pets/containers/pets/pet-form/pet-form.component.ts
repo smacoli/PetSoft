@@ -51,7 +51,7 @@ export class PetFormComponent {
 
   onSubmit() {
     this.service.save(this.form.value).subscribe({
-      next: (result) => this.onSuccess(),
+      next: (result) => this._snackBar.open('Os dados foram atualizados!', '', { duration: 3000 }),
       error: (error) => this.onError(),
     });
   }
