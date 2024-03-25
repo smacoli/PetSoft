@@ -54,6 +54,7 @@ export class PetFormComponent {
       next: (result) => this._snackBar.open('Os dados foram atualizados!', '', { duration: 3000 }),
       error: (error) => this.onError(),
     });
+    this.location.back();
   }
 
   onCancel() {

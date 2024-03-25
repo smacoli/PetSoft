@@ -23,14 +23,12 @@ export class PetService {
 
   // O Partial indica que o método save pode receber apenas alguns ou nenhum atributo do objeto pet
   save(record: Partial<Pet>) {
-    // Salva o pet no backend, esta sendo chamado no construtor do pet-form.js, no metodo click do botao salvar
+    // Salva o pet no backend, esta sendo chamado no construtor do pet-form.ts, no metodo onSubmit do botao salvar
+    
     //Verificacao de existencia do registro na base de dados, caso ja exista um ID é chamado o metodo update
-    console.log(record);
     if (record._id) {
-      console.log('Atualizando...');
       return this.update(record);
     }
-    console.log('Criando...');
     return this.create(record);
   }
 
