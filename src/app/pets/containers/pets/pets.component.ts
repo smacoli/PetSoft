@@ -8,6 +8,7 @@ import { of } from 'rxjs';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-pets',
@@ -59,7 +60,7 @@ export class PetsComponent implements OnInit {
         this.petsDataSource.data = data;
       });
     } else {
-      console.error('this.pets$ é nulo.');
+      console.error('Erro, ID nulo. Pets.component -> ngOnInit()');
     }
   }
 
@@ -73,16 +74,25 @@ export class PetsComponent implements OnInit {
   }
 
   onDelete(pet: Pet) {
-      this.petService.delete(pet._id).subscribe(() => {
-        //Atualiza a lista
-        this.refresh();
-        this.snackBar.open('Pet removido com sucesso!', 'Ok', {
-          duration: 3000,
-          verticalPosition: 'top',
-          horizontalPosition: 'center',
-        });
-      },
-      error => this.onError('Erro ao tentar remover pet.')
-      );
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: 'Tem certeza que deseja remover este pet?',
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.petService.delete(pet._id).subscribe(
+          () => {
+            //Atualiza a lista
+            this.refresh();
+            this.snackBar.open('Pet removido com sucesso!', 'Ok', {
+              duration: 3000,
+              verticalPosition: 'top',
+              horizontalPosition: 'center',
+            });
+          },
+          (error) => this.onError('Erro ao tentar remover pet.')
+        );
+      }
+    });
   }
 }

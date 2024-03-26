@@ -1,0 +1,7 @@
+<mat-dialog-content>
+  <p> {{ data }} </p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button color="warn" (click)="onConfirm(true)">Remover</button>
+  <button mat-button color="primary" (click)="onConfirm(false)" cdkFocusInitial>Cancelar</button>
+</mat-dialog-actions>

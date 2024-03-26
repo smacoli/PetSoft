@@ -4,13 +4,15 @@ import { ErrorDialogComponent } from './components/error-dialog/error-dialog.com
 import { AppMaterialModule } from './app-material/app-material.module';
 import { CategoryPipe } from './pipes/category.pipe';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 
 
 @NgModule({
   declarations: [
     ErrorDialogComponent,
-    CategoryPipe
+    CategoryPipe,
+    ConfirmationDialogComponent
   ],
   imports: [
     CommonModule,
@@ -18,6 +20,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
   ],
   exports: [
     ErrorDialogComponent,
+    ConfirmationDialogComponent,
     CategoryPipe,
     FormsModule,
     ReactiveFormsModule
