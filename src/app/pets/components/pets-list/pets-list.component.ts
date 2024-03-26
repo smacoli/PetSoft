@@ -12,6 +12,7 @@ export class PetsListComponent {
   @Input() pets: Pet[] = [];
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
+  @Output() delete = new EventEmitter(false);
 
   readonly displayedColumns = [
     'name',
@@ -31,5 +32,9 @@ export class PetsListComponent {
 
   onEdit(pet: Pet){
     this.edit.emit(pet);
+  }
+
+  onDelete(pet: Pet){
+    this.delete.emit(pet);
   }
 }

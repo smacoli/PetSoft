@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-pets',
@@ -14,8 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './pets.component.scss',
 })
 export class PetsComponent implements OnInit {
-
-  pets$: Observable<Pet[]>;
+  pets$: Observable<Pet[]> | null = null;
 
   displayedColumns = [
     'name',
@@ -32,8 +32,13 @@ export class PetsComponent implements OnInit {
     private petService: PetService,
     public dialog: MatDialog,
     public router: Router,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {
+    this.refresh();
+  }
+
+  refresh() {
     this.pets$ = this.petService.list().pipe(
       catchError((error) => {
         this.onError('Falha ao carregar dados.');
@@ -49,17 +54,35 @@ export class PetsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pets$.subscribe((data) => {
-      this.petsDataSource.data = data;
-    });
+    if (this.pets$) {
+      this.pets$.subscribe((data) => {
+        this.petsDataSource.data = data;
+      });
+    } else {
+      console.error('this.pets$ é nulo.');
+    }
   }
 
   onAdd() {
-    // Acao do botao adicionar pet, leva para pagina do form-pet
+    // Acao do botao adicionar pet, leva para página do form-pet
     this.router.navigate(['new'], { relativeTo: this.route }); // Relative to: pega a rota atual e agrega /new. Por exemplo, pets/new.
   }
 
-  onEdit(pet: Pet){
+  onEdit(pet: Pet) {
     this.router.navigate(['edit', pet._id], { relativeTo: this.route });
+  }
+
+  onDelete(pet: Pet) {
+      this.petService.delete(pet._id).subscribe(() => {
+        //Atualiza a lista
+        this.refresh();
+        this.snackBar.open('Pet removido com sucesso!', 'Ok', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+        });
+      },
+      error => this.onError('Erro ao tentar remover pet.')
+      );
   }
 }

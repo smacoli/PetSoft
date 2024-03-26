@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pet } from '../model/Pet';
-import { delay, first, take, tap } from 'rxjs';
+import { delay, first, take, tap, timeout } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -42,9 +42,9 @@ export class PetService {
       .pipe(first());
   }
 
-  private delete(id: string) {
+  public delete(id: string) {
     return this.httpClient
       .delete(`${this.API}/${id}`)
-      .pipe(first());
+      .pipe(timeout(3000), first());
   }
 }
