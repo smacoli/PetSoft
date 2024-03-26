@@ -74,6 +74,8 @@ export class PetsComponent implements OnInit {
   }
 
   onDelete(pet: Pet) {
+
+    //Dialog de confirmação para deletar um pet da base
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: 'Tem certeza que deseja remover este pet?',
     });

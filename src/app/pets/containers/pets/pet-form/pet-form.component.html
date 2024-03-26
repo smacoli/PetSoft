@@ -10,20 +10,23 @@
         <ng-template matStepLabel>Informações do pet</ng-template>
 
         <mat-form-field class="full-width">
+          <mat-label>Nome do pet: </mat-label>
           <input
             matInput
-            placeholder="Nome do pet"
             formControlName="name"
             required
+            #name
           />
+          <mat-hint align="end">{{name.value.length}}/20</mat-hint>
+          <mat-error *ngIf="form.get('name')?.invalid">{{ getErrorMessage('name') }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width">
+          <mat-label>Idade do pet: </mat-label>
           <input
             matInput
             placeholder="Idade do pet"
             formControlName="age"
-            required
           />
         </mat-form-field>
 
@@ -41,17 +44,19 @@
         <ng-template matStepLabel>Raça e espécie</ng-template>
 
         <mat-form-field class="full-width">
-          <mat-label>Espécie</mat-label>
-          <mat-select formControlName="species">
+          <mat-label>Espécie: </mat-label>
+          <mat-select formControlName="species" required>
             <mat-option value="Cao">Cão</mat-option>
             <mat-option value="Gato">Gato</mat-option>
             <mat-option value="Ave">Ave</mat-option>
             <mat-option value="Roedor">Roedor</mat-option>
           </mat-select>
+          <mat-error *ngIf="form.get('name')?.invalid">{{ getErrorMessage('species') }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width">
-          <input matInput placeholder="Raça" formControlName="race" required />
+          <mat-label>Raça: </mat-label>
+          <input matInput placeholder="Raça" formControlName="race"/>
         </mat-form-field>
 
         <div>
@@ -71,21 +76,25 @@
         >
 
         <mat-form-field class="full-width">
+          <mat-label>Observações: </mat-label>
           <input
             matInput
             placeholder="Observações"
             formControlName="observation"
-            required
           />
         </mat-form-field>
 
         <mat-form-field class="full-width">
+          <mat-label>Nome do tutor: </mat-label>
           <input
             matInput
             placeholder="Nome do tutor"
             formControlName="owner"
             required
+            #owner
           />
+          <mat-hint align="end">{{owner.value.length}}/50</mat-hint>
+          <mat-error *ngIf="form.get('name')?.invalid">{{ getErrorMessage('owner') }}</mat-error>
         </mat-form-field>
 
         <div>

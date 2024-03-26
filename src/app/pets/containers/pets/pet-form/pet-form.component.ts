@@ -1,7 +1,7 @@
 import { PetService } from '../../../services/pet.service';
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Pet } from '../../../model/Pet';
@@ -25,13 +25,13 @@ export class PetFormComponent {
   ) {
     // Constroi o formulario
     this.form = this.formBuilder.group({
-      _id: [null], //Campo escondido no form, apenas o componente tem acesso
-      name: [null],
-      age: [null],
-      species: [null],
-      race: [null],
-      observation: [null],
-      owner: [null],
+      _id: [''], //Campo escondido no form, apenas o componente tem acesso
+      name: ['', [Validators.required, Validators.maxLength(20)]],
+      age: [''],
+      species: ['', [Validators.required]],
+      race: [''],
+      observation: [''],
+      owner: ['', [Validators.required, Validators.maxLength(50)]],
     });
 
     const pet: Pet = this.route.snapshot.data['pet'];
@@ -44,14 +44,16 @@ export class PetFormComponent {
       species: pet.species,
       race: pet.race,
       observation: pet.observation,
-      owner: pet.owner
-    })
-
+      owner: pet.owner,
+    });
   }
 
   onSubmit() {
     this.service.save(this.form.value).subscribe({
-      next: (result) => this._snackBar.open('Os dados foram atualizados!', '', { duration: 3000 }),
+      next: (result) =>
+        this._snackBar.open('Os dados foram atualizados!', '', {
+          duration: 3000,
+        }),
       error: (error) => this.onError(),
     });
     this.location.back();
@@ -67,6 +69,22 @@ export class PetFormComponent {
   }
 
   private onError() {
-    this._snackBar.open('Erro ao salvar pet', '', { duration: 3000 }); // Snackbar de erro
+    this._snackBar.open('Erro ao salvar pet.', '', { duration: 3000 }); // Snackbar de erro
+  }
+
+  //Validação do formulário
+  getErrorMessage(fieldName: string){
+    const field = this.form.get(fieldName);
+
+    if(field?.hasError('required')){
+      return 'Campo obrigatório';
+    }
+
+    if(field?.hasError('maxlength')){
+      const requiredLength = field.errors ? field.errors['maxlength']['requiredLength'] : 20;
+      return `Tamanho máximo de ${requiredLength} caracteres`;
+    }
+
+    return 'Campo inválido'
   }
 }
